@@ -27,7 +27,7 @@ At time of writing, I've been building software for a total of 26 years.  I got 
 20 GOTO 10
 ```
 
-...but quickly moved on to [VB4](https://en.wikipedia.org/wiki/Visual_Basic_(classic)), and spent countless nights and weekends trying to build the next big POS system.  Yes, I was that kind of nerd.
+...but quickly moved on to [VB4, then VB6](https://en.wikipedia.org/wiki/Visual_Basic_(classic)), spending countless nights and weekends trying to build the next big POS system.  Yes, I was that kind of nerd.
 
 Jump forward almost 20 years and I've now built multiple startups from the ground up.  Some have failed, some are still operating to this day.
 
@@ -48,33 +48,33 @@ That was 3 years ago.
 
 At the time I initially embarked on this journey, I was just finishing a $100k+ project I had built from scratch with only myself, a designer, and a junior developer.  It was running smoothly, and it was the perfect time to pick up something new.  That project was using "multi-cloud" approach, hosting things in a myriad of places such as [Redis Labs](https://redis.io/), [Azure](https://azure.microsoft.com/), and [Mongo Atlas](https://www.mongodb.com/products/platform/atlas-database).  It was a fun project to build; I had complete creative control, and could build anything just the way I wanted.  I'm still proud of it to this day.
 
-Taking inspiration from that project, as well as a [failed project](https://www.sec.gov/litigation/litreleases/lr-25825) I moved on to later, I had a good starting point.  My basic approach boiled down to this:
+So with UnAd, taking inspiration from that previous project, as well as a [failed project](https://www.sec.gov/litigation/litreleases/lr-25825) I moved on to later, I had a good starting point.  My basic approach boiled down to this:
 
 ![30000ft view](/30000ft-old.svg)
 
-Nothing too crazy; a [Next.js](https://nextjs.org/) site to handle webhooks from from Twilio and Stripe, as well as a frontend to allow users to sign up, all of which would be managed by a Redis database.  The design was a simple as, *I thought*, the system would be.  And in all honesty, had things gone the way they could have, it would have stopped there.  But my mistake, as I soon found out, was the decision to use Next.js to begin with.
+Nothing too crazy; a [Next.js](https://nextjs.org/) site to handle webhooks from from [Twilio](https://www.twilio.com/), [Stripe](https://stripe.com/) for payment processing, as well as a frontend to allow users to sign up, and all of handled by a Redis database.  The design was a simple as *I thought* the system would be.  And in all honesty, had things gone the way they could have, it would have stopped there.  But my mistake, as I soon found out, was the decision to use Next.js to begin with.
 
 ## The First Pain Points
 
-Don't get me wrong.  Next is a solid technology.  In fact, it still runs the [Signup Site](https://signup.unad.tech/).  My failure in the decision to use it was not knowing it's limitations.
+Don't get me wrong.  Next is a solid technology.  In fact, it still runs the [Signup Site](https://signup.unad.tech/) to this day.  My failure in the decision to use it was not knowing it's limitations.
 
-For instance, one of the first critical feature I wanted to ensure was available from day one was Internationalization in both English and Spanish.  I live in a city with a very large Latinx population, and wanted to make sure that the experience of using my system was just as easy for both native English and Spanish speakers.  So, to that end, I employed, initially, [next-i18next](https://github.com/i18next/next-i18next).
+For instance, one of the first critical features I wanted to ensure was available from day one was Internationalization in both English and Spanish.  I live in a city with a very large Latinx population, and wanted to make sure that the experience of using my system was just as easy for both native English and Spanish speakers.  So, to that end, I chose [next-i18next](https://github.com/i18next/next-i18next) to help me accomplish this task.
 
 For strictly front-end translation, this tool works like a charm.  The setup process is a bit clumsy, but it's approach to providing the translation function as a simple `t()` function returned from a [hook](https://react.dev/reference/react/hooks) is intuitive and easy to use.  But then there's server-side translations, which, after **weeks** of fighting, proved to be, at the time, basically impossible.
 
-The key point about that, though, is that the lack server-side translation was not a limitation of it's underlying library, [i18next](https://www.i18next.com/), (no relation to Next.js, btw) but rather how Next.js, as you go deeper and need more customization, becomes more and more *hostile* to these changes.
+The key point about that, though, is that the lack of server-side translation was not a limitation of it's underlying library, [i18next](https://www.i18next.com/), (no relation to Next, btw) but rather how Next.js, as you go deeper and need more customization, becomes more and more *hostile* to these changes.
 
 ## The Black Box Problem
 
 *Let's go back in time a bit...*
 
-My very first "real" job as a developer was in 2006.  I had just completed a course in "Game Programming" from a now-defunct community college, and had been placed as an intern at a [airfoil](https://en.wikipedia.org/wiki/Components_of_jet_engines) manufacturing plant.  My charge was to, piece by piece, begin the process of replacing a series of applications written in a mix of [FoxPro](https://en.wikipedia.org/wiki/FoxPro) and VB6 with new versions written in the new-fangled .NET Framework.  Which, as luck would have it, I had already been learning on the side during my course at the college.
+My very first "real" job as a developer was in 2006.  I had just completed a course in Game Development from a now-defunct community college, and had been placed as an intern at a [airfoil](https://en.wikipedia.org/wiki/Components_of_jet_engines) manufacturing plant.  My charge was to, piece by piece, begin the process of replacing a series of applications written in a mix of [FoxPro](https://en.wikipedia.org/wiki/FoxPro) and VB6 with new versions written in the new-fangled .NET Framework.  Which, as luck would have it, I had already been learning on the side during my course at the college.
 
-I remember distinctly the very first interview question.  The head of IT sat me down at his desk, opened an ASP.NET project, and asked me, "Where is the entry point of this application."  I dutifully opened the `Gloabal.aspx.cs` file, navigated to `Application_Start`, and said triumphantly, "Right here!"
+I remember distinctly the very first interview question.  The head of IT sat me down at his desk, opened an ASP.NET project, and asked me, "Where is the entry point of this application?"  I dutifully opened the `Gloabal.aspx.cs` file, navigated to `Application_Start`, and said triumphantly, "Right here!"
 
 In retrospect, this should have been the end of my answer.  But, as my wife would gladly attest to, I rarely just leave it at that.
 
-So instead, I launched into a 10-minute rant about how, "But also, not really, because that function is really just a special function that ASP.NET itself looks for when the DLL is loaded by IIS," followed by a impassioned speech about the limitations introduced by this "black box" approach to a web server.  Anyone who had tried "real" Dependency Injection in ASP.NET prior to the release of [OWIN](https://learn.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana) knows exactly what I'm talking about.
+So instead, I launched into a 10-minute rant about how, "But also, not really, because that function is actually just a special function that ASP.NET itself looks for when the DLL is loaded by IIS," followed by a impassioned speech about the limitations introduced by this "black box" approach to a web server.  Anyone who had tried "real" Dependency Injection in ASP.NET prior to the release of [OWIN](https://learn.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana) knows exactly what I'm talking about.
 
 *Back to the present day...*
 
@@ -105,10 +105,12 @@ const t = await createTranslator(req, 'pages/api/otp');
 
 Could I have simply written an Express or ASP.NET app from scratch and avoided all this?  Yes.  But, to Vercel's point, a "streamlined developer experience" and "increased time-to-market" is *exactly what I was looking for*.
 
-And therein lies the problem.  In the same way that convenience and security are often polar opposites, it seems so is convenience and control.  In reaching for the "quick" solution, I sacrificed the power I would have otherwise to produce the software I wanted to deliver.
+And therein lies the problem.  In the same way that convenience and security are often polar opposites, it seems often is convenience and control.  In reaching for the "quick" solution, I sacrificed the power I would have otherwise to produce the software I wanted to deliver.
 
 ## Moving Forward
 
-Taking this as a lesson, *every single project* in the UnAd system, even the simplest utilities, would be written with tools that hide as little as possible from the developer.  In situations where abstraction is inherently high, I would only go with tools that provided extension points to modify the behavior of those abstractions.  Admittedly, this decision absolutely increased the development time significantly, but at the time time, significantly decreased my levels of stress during development, because the limitations became, in almost all cases, limitations of my own knowledge rather than that of the tools.
+Taking this as a lesson, *every single project* in the UnAd system, even the simplest utilities, would be written with tools that hide as little as possible from the developer.  In situations where abstraction is inherently high, I would only go with tools that provided extension points to modify the behavior under those abstractions.  Admittedly, this decision absolutely increased the development time significantly, but at the same time, significantly decreased my levels of stress, because the limitations became, in almost all cases, limitations of my own knowledge rather than that of the tools I chose.
 
-Turns out, I can learn much faster than I can have a PR approved.
+Turns out, I can learn much faster than I can get a PR approved.
+
+> Next up, the saga continues in: **The Evolution of UnAd**
