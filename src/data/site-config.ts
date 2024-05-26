@@ -38,9 +38,9 @@ export type SiteConfig = {
 };
 
 const siteConfig: SiteConfig = {
-    title: 'Dante',
-    subtitle: 'Minimal Astro.js theme',
-    description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
+    title: 'UnAd Devlog',
+    subtitle: 'Yes, Its another Devlog',
+    description: 'A resource for developers to learn from my mistakes',
     image: {
         src: '/dante-preview.jpg',
         alt: 'Dante - Astro.js and Tailwind CSS theme'
@@ -49,10 +49,6 @@ const siteConfig: SiteConfig = {
         {
             text: 'Home',
             href: '/'
-        },
-        {
-            text: 'Projects',
-            href: '/projects'
         },
         {
             text: 'Blog',
@@ -73,34 +69,16 @@ const siteConfig: SiteConfig = {
             href: '/contact'
         },
         {
-            text: 'Terms',
-            href: '/terms'
-        },
-        {
-            text: 'Download theme',
+            text: 'Built with Astro 🚀',
             href: 'https://github.com/JustGoodUI/dante-astro-theme'
         }
     ],
-    socialLinks: [
-        {
-            text: 'Dribbble',
-            href: 'https://dribbble.com/'
-        },
-        {
-            text: 'Instagram',
-            href: 'https://instagram.com/'
-        },
-        {
-            text: 'X/Twitter',
-            href: 'https://twitter.com/'
-        }
-    ],
     hero: {
-        title: 'Hi There & Welcome to My Corner of the Web!',
-        text: "I'm **Ethan Donovan**, a web developer at Amazing Studio, dedicated to the realms of collaboration and artificial intelligence. My approach involves embracing intuition, conducting just enough research, and leveraging aesthetics as a catalyst for exceptional products. I have a profound appreciation for top-notch software, visual design, and the principles of product-led growth. Feel free to explore some of my coding endeavors on <a href='https://github.com/JustGoodUI/dante-astro-theme'>GitHub</a> or follow me on <a href='https://twitter.com/justgoodui'>Twitter/X</a>.",
+        title: "Yes, It's another Devlog",
+        text: 'Welcome!  My name is Stephen Collins.  I am a Software Architect who took the bold decision to attempt to build a brand-new product from the ground up, by myself, in my spare time.  The result was <a href="https://theunad.com">UnAd</a>, a direct-to-consumer SMS relay system targeted at small business.<br><br>This blog is intended to be--as well as a creative outlet--a resource for other developers to learn from my mistakes.',
         image: {
-            src: '/hero.jpeg',
-            alt: 'A person sitting at a desk in front of a computer'
+            src: '/hero.webp',
+            alt: 'Me, according to ChatGPT'
         },
         actions: [
             {
@@ -108,11 +86,6 @@ const siteConfig: SiteConfig = {
                 href: '/contact'
             }
         ]
-    },
-    subscribe: {
-        title: 'Subscribe to Dante Newsletter',
-        text: 'One update per week. All the latest posts directly in your inbox.',
-        formUrl: '#'
     },
     postsPerPage: 8,
     projectsPerPage: 8
